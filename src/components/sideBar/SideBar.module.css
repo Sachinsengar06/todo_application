@@ -1,0 +1,72 @@
+@media screen and (min-width:480px) {
+    .sideBar_container{
+        box-sizing: border-box;
+        background-color: rgb(201, 139, 139);
+        width: 25vw;
+        margin-top: 45px; 
+        height: calc(100vh - 100px); 
+        position: fixed;
+        bottom: 0;
+        border-top-right-radius: 8px;
+        
+    }
+    .img_div{
+        position: relative;
+       
+    }
+    .img_div>img {
+        position: absolute;
+        top:calc(0% - 40px);
+        left: 50%;
+        transform:translateX(-50%);
+        border-radius: 50%;
+        width: 80px;
+    
+    }
+    .dashBoard_info{
+        text-align: center;
+        margin-top: 50px;
+        
+    }
+    .name{
+        font-weight: 800;
+        font-size: 20px;
+    }
+    .gmail{
+        font-weight: 500;
+    }
+    .dashBoard{
+        display: flex;
+        gap:10px;
+    }
+    .dashBoard_btns, .logout,.dashBoard{
+        margin-top: 15px;
+        margin-left: 10px;
+    }
+    
+}
+@media screen and (max-width:480px){
+    .sideBar_container{
+        box-sizing: border-box;
+        background-color: red;
+        max-width: 100vw;
+        height: 45px;
+        display: flex;
+        justify-content: space-between;
+        padding-left: 10px;
+        padding-right: 10px;
+        align-items: center;
+        flex-direction: row-reverse;
+    }
+    .img_div{
+        height: inherit;
+    }
+    .img_div>img {
+        border-radius: 50%;
+        width: 45px;
+    }
+
+    .dashBoard_btns, .logout, .gmail, .dashBoard{
+        display: none;
+    }
+}
