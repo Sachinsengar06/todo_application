@@ -1,12 +1,15 @@
 .header_container{
+    box-sizing: border-box;
     min-width: 100vw;
     min-height: 55px;
     background-color: rgb(112, 112, 220);
     position:fixed;
     z-index: 10;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     padding-left: 10px;
+    padding-right: 10px;
     font-weight: 700;
     font-size: 29px;
     color: white;

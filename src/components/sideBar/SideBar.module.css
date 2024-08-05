@@ -1,7 +1,7 @@
 @media screen and (min-width:480px) {
     .sideBar_container{
         box-sizing: border-box;
-        background-color: rgb(201, 139, 139);
+        background-color: #0b1218;
         width: 25vw;
         margin-top: 45px; 
         height: calc(100vh - 100px); 
@@ -31,17 +31,28 @@
     .name{
         font-weight: 800;
         font-size: 20px;
+        color: orange;
     }
     .gmail{
         font-weight: 500;
+        color: orange;
     }
     .dashBoard{
         display: flex;
         gap:10px;
     }
+    .dashBoard_btns>div{
+        margin-top: 2px;
+        cursor: pointer;
+    }
+   
     .dashBoard_btns, .logout,.dashBoard{
         margin-top: 15px;
         margin-left: 10px;
+    }
+    .dashBoard_text{
+        font-size: 18px;
+        color: white;
     }
     
 }

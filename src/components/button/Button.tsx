@@ -1,10 +1,14 @@
+import styles from './Button.module.css';
+
 interface ButtonProps {
     text:string;
+    handleClick:()=>void
+    icon?:string;
 }
-const Button = ({text}:ButtonProps) => {
+const Button = ({text, handleClick}:ButtonProps) => {
   return (
-    <div>
-      <p>{text}</p>
+    <div className = {styles.text_button} onClick={handleClick}>
+      <p style={{color:"white"}} >{text}</p>
     </div>
   )
 }
