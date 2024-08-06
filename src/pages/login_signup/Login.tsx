@@ -3,30 +3,31 @@ import styles from './Style.module.css'
 import { getUser } from '../../localStorage/authDataStroage';
 import { User } from '../../localStorage/authDataStroage';
 import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../redux/store';
+import { setUser } from '../../redux/authSlice';
 
-interface LoginProps {
-  toggleLogin: () => void;
-}
 
 interface InitialData {
   email: string;
   password: string;
 }
-const Login = ({ toggleLogin }: LoginProps) => {
+const Login = () => {
   const initialData: InitialData = {
     email: '',
     password: ''
   }
   const [loginData, setLoginData] = useState<InitialData>(initialData);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const handleLogin = (e:React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
       const existingUser = getUser();
       const validUser = existingUser.find((user: User) => user.email === loginData.email && user.password === loginData.password)
+      console.log(validUser.name);
       if (validUser) {
         navigate('/');
-        toggleLogin();
+        dispatch(setUser({email:validUser.email, name:validUser.name, isLogin:true}))
       }
       else {
         alert("Invalid credentails")

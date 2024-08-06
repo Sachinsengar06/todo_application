@@ -15,8 +15,9 @@ interface TaskCardProps {
   deleteTask?: (id: number) => void;
   editTask?: (data: Data) => void;
   isComplete?: boolean;
+  date?:string;
 }
-const TaskCard = ({ id, title, desc, deleteTask, editTask, isComplete }: TaskCardProps) => {
+const TaskCard = ({ id, title, desc, deleteTask, editTask, isComplete,date }: TaskCardProps) => {
   const dispatch = useAppDispatch();
 
   const data = { id, title, desc };
@@ -32,11 +33,15 @@ const TaskCard = ({ id, title, desc, deleteTask, editTask, isComplete }: TaskCar
           {deleteTask && <MdDelete style={{ color: "white" }} onClick={() => deleteTask(id)} />}
         </div>
       </div>
-      <div style={{ color: "white" }}>{desc}</div>
+      <div  className={styles.desc}>{desc}</div>
       <div className = {styles.checkbox}>
         {isComplete && <div>
           <label style={{ color: 'white' }}>Completed</label>
           <input type='checkbox' onChange={() => handleChecked(id)} />
+        </div>}
+        {date&&<div className= {styles.date}>
+          <label style={{color:'white'}}>End Date: </label>
+          <p style={{ color: 'white'}}>{date}</p>
         </div>}
       </div>
     </div>

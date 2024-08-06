@@ -7,10 +7,11 @@ import { useAppDispatch, useTypedSelector } from "../../redux/store"
 import { deleteTask } from "../../redux/taskSlice"
 import { useNavigate } from "react-router-dom"
 
-const HomePage = ({toggleLogin}:any) => {
+const HomePage = () => {
  
   const registerCardRef = useRef<HTMLDialogElement>(null);
   const data = useTypedSelector((state) => state.tasks);
+  const userData = useTypedSelector((state) => state.user)
   const [currentTask, setCurrentTask] = useState(null);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -33,12 +34,12 @@ const HomePage = ({toggleLogin}:any) => {
   }
   return (
     <div className={styles.homepage_container}>
-      <SideBar loginStatus = {toggleLogin} />
+      <SideBar />
       <div className={styles.task_area}>
         <div className={styles.add_task_area}>
           <div style={{ display: "flex", justifyContent: "space-between", width: "31vw", alignItems: "center",color:"white"}}>
             To-Do
-            <button className={styles.addtask_btn} onClick={()=>{toggleLogin?navigate('/login'):handleOpenAddTaskCard("open")}}>Add Task</button>
+            <button className={styles.addtask_btn} onClick={()=>{userData.isLogin?handleOpenAddTaskCard("open"):navigate('/login')}}>Add Task</button>
           </div>
           <div className={styles.taskCard}>
           {data.tasks.filter(todo => todo.isComplete).length === 0 && (
@@ -47,7 +48,7 @@ const HomePage = ({toggleLogin}:any) => {
                 <h1>Add Your Task</h1>
               </div>
             )}
-            {!toggleLogin&&
+            {userData.isLogin&&
               data.tasks .filter(todo => todo.isComplete).map((todo) => (
                 <TaskCard
                   key={todo.id}
@@ -57,9 +58,10 @@ const HomePage = ({toggleLogin}:any) => {
                   deleteTask={handleDelete}
                   editTask = {handleEdit} 
                   isComplete = {todo.isComplete}
+                  
                   />
                  
-              ))
+              )).reverse()
             }
           </div>
         </div>
@@ -68,15 +70,16 @@ const HomePage = ({toggleLogin}:any) => {
           <div style={{ display: "flex", justifyContent: "space-between", width: "31vw", alignItems: "center",color:"white"}}>
             Completed Task
           </div>
-          {!toggleLogin&&
+          {userData.isLogin&&
               data.tasks.filter(todo => !todo.isComplete).map((todo) => (
                 <TaskCard
                   key={todo.id}
                   id={todo.id}
                   title={todo.title}
                   desc={todo.desc}
+                  date = {todo.date}
                   />
-              ))
+              )).reverse()
             }
         </div>
       </div>
@@ -87,4 +90,4 @@ const HomePage = ({toggleLogin}:any) => {
     </div>
   )
 }
-export default HomePage
+export default HomePage;

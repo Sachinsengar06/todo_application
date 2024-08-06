@@ -4,6 +4,7 @@ export interface Task {
     title: string;
     desc: string;
     isComplete: boolean;
+    date:string;
 }
 
 export interface TasksState {

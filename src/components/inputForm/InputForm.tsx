@@ -14,6 +14,7 @@ interface InitialState {
     title: string;
     desc: string;
     isComplete: boolean;
+    date:string;
 }
 
 const initialState: InitialState = {
@@ -21,13 +22,13 @@ const initialState: InitialState = {
     title: '',
     desc: '',
     isComplete: true,
+    date:new Date().toISOString().split('T')[0]
 }
 
 const InputForm = ({ text, closeCard, task }: InputProps) => {
     const idRef = useRef(0);
     const [data, setData] = useState<InitialState>(initialState);
     const dispatch = useAppDispatch()
-
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setData(prevData => ({
@@ -49,7 +50,7 @@ const InputForm = ({ text, closeCard, task }: InputProps) => {
 
     useEffect(() => {
         if (task) {
-            setData({...data,id:task.id,title:task.title,desc:task.desc,isComplete:true}); // set the form data with the task to be edited
+            setData({ ...data, id: task.id, title: task.title, desc: task.desc, isComplete: true }); // set the form data with the task to be edited
         } else {
             setData(initialState); // reset the form
         }
@@ -70,7 +71,7 @@ const InputForm = ({ text, closeCard, task }: InputProps) => {
             setData(initialState); // Reset the form
             closeCard("close");
         }
-        else{
+        else {
             alert('Title and description can not be empty');
         }
 
@@ -97,6 +98,9 @@ const InputForm = ({ text, closeCard, task }: InputProps) => {
                 value={data.desc}
 
             />
+            <label style={{color:'white'}}>
+                <input type="date" name="date" value={data.date} min={new Date().toISOString().split('T')[0]}  onChange={handleChange}/>
+            </label>
             <button className={styles.btn} onClick={handleCloseCard}>{text}</button>
         </div>
     )

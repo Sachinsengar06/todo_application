@@ -1,9 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
+import userReducer from './authSlice';
 import taskReducer from './taskSlice'
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+
 export const store = configureStore({
     reducer:{
-        tasks:taskReducer
+        tasks:taskReducer,
+        user:userReducer,
     }
 })
 export type RootState = ReturnType<typeof store.getState>;

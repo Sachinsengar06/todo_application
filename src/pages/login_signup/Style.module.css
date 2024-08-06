@@ -1,6 +1,6 @@
 
 .img_div{
-    height: calc(100vh - 55px);
+    height: 100vh;
     background-color: red;
     overflow: hidden;
 }

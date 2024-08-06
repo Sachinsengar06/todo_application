@@ -1,23 +1,24 @@
 import { useNavigate } from 'react-router-dom'
 import styles from './Header.module.css'
-interface HeaderProps{
-  toggleLoginBtn:()=>void
-  toggleLogin:boolean;
-}
-const Header = ({toggleLogin,toggleLoginBtn}:HeaderProps) => {
+import { useAppDispatch, useTypedSelector } from '../../redux/store';
+import { clearUser } from '../../redux/authSlice';
+
+const Header = () => {
   const navigate = useNavigate()
+  const dispatch = useAppDispatch();
+  const userData = useTypedSelector((state)=> state.user)
   const handleNavigation = () => {
-    if(toggleLogin){
-      navigate('/login')
+    if(userData.isLogin){
+      dispatch(clearUser());
     }
     else{
-      toggleLoginBtn()
+      navigate('/login')
     }
   }
   return (
     <div className = {styles.header_container}>
       To-do Application
-      <button onClick={handleNavigation}>{toggleLogin?'Login':'LogOut'}</button>
+      <button onClick={handleNavigation}>{userData.isLogin?'LogOut':'Login'}</button>
     </div>
   )
 }
